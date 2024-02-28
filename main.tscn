@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://blaook5frxf73"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_4gpbd"]
+[ext_resource type="Script" path="res://player.gd" id="1_wrnlu"]
+[ext_resource type="Script" path="res://ball.gd" id="2_b4lub"]
+[ext_resource type="PackedScene" uid="uid://by1awskid888e" path="res://brick.tscn" id="3_ptqiq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sdch3"]
+size = Vector2(95, 20)
+
+[sub_resource type="Gradient" id="Gradient_wstjp"]
+colors = PackedColorArray(0.847059, 0, 0, 1, 0.184314, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ii0bu"]
+gradient = SubResource("Gradient_wstjp")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjcvv"]
+size = Vector2(133, 989.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4v0n"]
+size = Vector2(605.5, 422.75)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ue48s"]
+radius = 13.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_v3b58"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fwmin"]
+font_size = 30
+
+[node name="main" type="Node2D"]
+position = Vector2(-1, 2)
+script = ExtResource("1_4gpbd")
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(246, 932)
+script = ExtResource("1_wrnlu")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+shape = SubResource("RectangleShape2D_sdch3")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+position = Vector2(0.999985, 6.14524e-05)
+scale = Vector2(1.5, 0.3125)
+texture = SubResource("GradientTexture2D_ii0bu")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-79, 859)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(12, -362.75)
+shape = SubResource("RectangleShape2D_wjcvv")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(-79, 859)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(652, -363)
+shape = SubResource("RectangleShape2D_wjcvv")
+
+[node name="Top" type="StaticBody2D" parent="."]
+position = Vector2(-79, 859)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+position = Vector2(316, -1072)
+shape = SubResource("RectangleShape2D_c4v0n")
+
+[node name="ball" type="CharacterBody2D" parent="."]
+script = ExtResource("2_b4lub")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+position = Vector2(251, 895)
+shape = SubResource("CircleShape2D_ue48s")
+
+[node name="Sprite2D" type="Sprite2D" parent="ball/CollisionShape2D"]
+position = Vector2(-1.90735e-06, 0.499996)
+scale = Vector2(18, 19)
+texture = SubResource("PlaceholderTexture2D_v3b58")
+
+[node name="brick" parent="." instance=ExtResource("3_ptqiq")]
+position = Vector2(-112, -38)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 212.0
+offset_top = 761.0
+offset_right = 314.0
+offset_bottom = 814.0
+text = "TESTE"
+label_settings = SubResource("LabelSettings_fwmin")
